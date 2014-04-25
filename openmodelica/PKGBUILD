@@ -1,7 +1,7 @@
 # Maintainer: viperpaulo
 pkgname=openmodelica-svn
 pkgver=20264
-pkgrel=1
+pkgrel=2
 pkgdesc="The Open Source Modelica Compiler "
 arch=('i686' 'x86_64')
 url="https://openmodelica.org"
@@ -38,15 +38,9 @@ build() {
       --with-METIS=/usr \
       --disable-modelica3d \
       --disable-python-interface \
+      --with-omc \
       --with-lapack='-llapack -lblas'
    
-    if [[ -e omc ]];
-    then
-      echo "omc already installed, copying into the right directory"
-      mkdir -p build/bin/
-      ln -s $(which omc) build/bin/
-    fi
-
     make
 }
 
