@@ -1,6 +1,6 @@
 # Maintainer: viperpaulo
 pkgname=openmodelica-svn
-pkgver=20198
+pkgver=20264
 pkgrel=1
 pkgdesc="The Open Source Modelica Compiler "
 arch=('i686' 'x86_64')
@@ -40,25 +40,14 @@ build() {
       --disable-python-interface \
       --with-lapack='-llapack -lblas'
    
-   
-#    ./configure --prefix=/usr \
-#       --with-omniORB \
-#       --with-paradiseo \
-#       --disable-rml-trace \
-#       --without-ipopt \
-#       --disable-modelica3d \
-#       --disable-python-interface \
-#       --with-lapack='-llapack -lblas'
-#    # 	--with-qwt \
+    if [[ -e omc ]];
+    then
+      echo "omc already installed, copying into the right directory"
+      mkdir -p build/bin/
+      ln -s $(which omc) build/bin/
+    fi
 
-	make release omc
-	make release omc-rml
-	make release mosh
-	make release omlibrary
-	make release qtclients
-
-#    make omlibrary
-#    make release omc omc-rml mosh qtclients
+    make
 }
 
 # check() {
@@ -72,14 +61,4 @@ package() {
 
   cd "${srcdir}/${_svnmod}"
   make DESTDIR="${pkgdir}" install
-
-#   ln -s /opt/openmodelica/bin/OMEdit ${pkgdir}/usr/bin/
-#   ln -s /opt/openmodelica/bin/OMNotebook ${pkgdir}/usr/bin/
-#   ln -s /opt/openmodelica/bin/OMPlot ${pkgdir}/usr/bin/
-#   ln -s /opt/openmodelica/bin/OMShell ${pkgdir}/usr/bin/
-#   ln -s /opt/openmodelica/bin/OMShell-terminal ${pkgdir}/usr/bin/
-#   ln -s /opt/openmodelica/bin/fmigenerator ${pkgdir}/usr/bin/
-#   ln -s /opt/openmodelica/bin/interactiveclient ${pkgdir}/usr/bin/
-#   ln -s /opt/openmodelica/bin/omc ${pkgdir}/usr/bin/
-#   ln -s /opt/openmodelica/bin/omc-diff ${pkgdir}/usr/bin/
 }
