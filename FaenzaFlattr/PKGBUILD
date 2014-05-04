@@ -9,7 +9,6 @@ url="http://kde-look.org/content/show.php/FaenzaFlattr?content=164770"
 license=('GPL')
 arch=('any')
 depends=('kdebase-workspace')
-makedepends=('p7zip')
 source=("FaenzaFlattr.7z::https://drive.google.com/uc?export=download&id=0BwlW9hKxf1tUYlNOajVFdEtnN1k")
 sha512sums=('57379333402896d23bc047d12156916c192f5cd457d9780a43d42ca882e2d44a4afd550911fcb6f42ec73f4c8e9807a86fa23d96549485cb9d1700b2f9cce2db')
 
