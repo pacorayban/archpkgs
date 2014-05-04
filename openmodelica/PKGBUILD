@@ -1,7 +1,7 @@
 # Maintainer: viperpaulo
 pkgname=openmodelica-svn
-pkgver=20264
-pkgrel=2
+pkgver=20337
+pkgrel=1
 pkgdesc="The Open Source Modelica Compiler "
 arch=('i686' 'x86_64')
 url="https://openmodelica.org"
@@ -38,9 +38,10 @@ build() {
       --with-METIS=/usr \
       --disable-modelica3d \
       --disable-python-interface \
-      --with-omc \
       --with-lapack='-llapack -lblas'
+#       --with-omc \
    
+    make omc-bootstrapped
     make
 }
 
