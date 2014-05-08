@@ -4,7 +4,7 @@ pkgname=faenzaflattr_darkplasma-icon-theme
 _pkgname=FaenzaFlattr-DarkPlasma
 pkgver=0.8
 pkgrel=1
-pkgdesc="FaenzaFlattr icon theme for KDE4"
+pkgdesc="FaenzaFlattr icon theme for KDE4 with DarkPlasma fix"
 url="http://kde-look.org/content/show.php/FaenzaFlattr?content=164770"
 license=('CCPL:by-nc-sa')
 arch=('any')
@@ -16,7 +16,6 @@ options=(!strip)
 package() {
   install -d $pkgdir/usr/share/icons
   install -Dm644 $srcdir/${_pkgname}/LICENSE.txt $pkgdir/usr/share/licenses/${_pkgname}/LICENSE
-#   install -Dm644 $srcdir/${_pkgname} $pkgdir/usr/share/icons/${_pkgname}
   cp -r $srcdir/${_pkgname} $pkgdir/usr/share/icons/
   rm $pkgdir/usr/share/icons/${_pkgname}/LICENSE.txt
   rm $pkgdir/usr/share/icons/${_pkgname}/.gitignore

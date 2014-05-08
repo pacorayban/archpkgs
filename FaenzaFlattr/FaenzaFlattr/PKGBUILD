@@ -16,7 +16,6 @@ options=(!strip)
 package() {
   install -d $pkgdir/usr/share/icons
   install -Dm644 $srcdir/${_pkgname}/LICENSE.txt $pkgdir/usr/share/licenses/${_pkgname}/LICENSE
-#   install -Dm644 $srcdir/${_pkgname} $pkgdir/usr/share/icons/${_pkgname}
   cp -r $srcdir/${_pkgname} $pkgdir/usr/share/icons/
   rm $pkgdir/usr/share/icons/${_pkgname}/LICENSE.txt
   rm $pkgdir/usr/share/icons/${_pkgname}/.gitignore
