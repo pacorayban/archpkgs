@@ -2,15 +2,15 @@
 
 pkgname=faenzaflattr-icon-theme
 _pkgname=FaenzaFlattr
-pkgver=1.0
+pkgver=1.0.1
 pkgrel=1
 pkgdesc="FaenzaFlattr icon theme for KDE4"
 url="http://kde-look.org/content/show.php/FaenzaFlattr?content=164770"
 license=('CCPL:by-nc-sa')
 arch=('any')
 depends=('kdebase-workspace')
-source=("${_pkgname}.7z::https://drive.google.com/uc?export=download&id=0BwlW9hKxf1tUYlNOajVFdEtnN1k")
-md5sums=('a0fe84cd1bf21b7dac647b11183f9a19')
+source=("${_pkgname}_${pkgver}.7z::https://drive.google.com/uc?export=download&id=0BwlW9hKxf1tUYlNOajVFdEtnN1k")
+md5sums=('43257490804813416998329f4ccda2a7')
 options=(!strip)
 
 package() {
