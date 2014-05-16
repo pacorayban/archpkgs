@@ -18,8 +18,6 @@ package() {
   install -Dm644 $srcdir/${_pkgname}/LICENSE.txt $pkgdir/usr/share/licenses/${_pkgname}/LICENSE
   cp -r $srcdir/${_pkgname} $pkgdir/usr/share/icons/
   rm $pkgdir/usr/share/icons/${_pkgname}/LICENSE.txt
-  rm $pkgdir/usr/share/icons/${_pkgname}/.gitignore
-  rm -rf $pkgdir/usr/share/icons/${_pkgname}/.git
   
 # # Small icons fix: use scalable icons instead of small ones
 #   cd $pkgdir/usr/share/icons/${_pkgname}/places/
