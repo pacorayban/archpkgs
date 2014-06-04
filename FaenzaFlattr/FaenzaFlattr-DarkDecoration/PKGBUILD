@@ -39,6 +39,11 @@ package() {
 #   ln -s scalable/folder-network.svg   small/folder-network.svg  
 #   ln -s scalable/folder-videos.svg    small/folder-videos.svg   
 
+#   Old Firefox icon fix 
+#   cd ../apps/scalable/
+#   mv firefox.svgz firefox_new.svgz
+#   ln -s firefox2.svg firefox.svg
+
 
   find $pkgdir/usr -type f -exec chmod 644 {} \;
   find $pkgdir/usr -type d -exec chmod 755 {} \;
