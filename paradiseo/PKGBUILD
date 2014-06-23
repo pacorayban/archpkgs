@@ -15,33 +15,30 @@ md5sums=('89f875b3f92abdb64b26c6c207fef346')
 options=('staticlibs')
 
 build() {
-	cd $srcdir/ParadisEO-2.0
+  cd $srcdir/ParadisEO-2.0
 
-	cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release .
-	make
+  cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release .
+  make
 }
 
 package() {
-	cd $srcdir/ParadisEO-2.0
+  cd $srcdir/ParadisEO-2.0
 
-	make install DESTDIR=$pkgdir
-	
-   mv $pkgdir/usr/include/paradiseo/eo/ $pkgdir/usr/include/paradiseo/eotmp/
-   cp -a $pkgdir/usr/include/paradiseo/eotmp/* $pkgdir/usr/include/paradiseo/
-   rm -r $pkgdir/usr/include/paradiseo/eotmp/
-   
-   mv $pkgdir/usr/include/paradiseo/mo/ $pkgdir/usr/include/paradiseo/motmp/
-   cp -a $pkgdir/usr/include/paradiseo/motmp/* $pkgdir/usr/include/paradiseo/
-   rm -r $pkgdir/usr/include/paradiseo/motmp/
+  make install DESTDIR=$pkgdir
 
-   mv $pkgdir/usr/include/paradiseo/moeo/ $pkgdir/usr/include/paradiseo/moeotmp/
-   cp -a $pkgdir/usr/include/paradiseo/moeotmp/* $pkgdir/usr/include/paradiseo/
-   rm -r $pkgdir/usr/include/paradiseo/moeotmp/
-	
-	mkdir -p $pkgdir/usr/lib/paradiseo
-	mv $pkgdir/usr/lib64/* $pkgdir/usr/lib/paradiseo/
-	rm -r $pkgdir/usr/lib64/
-	
-#    mv $pkgdir/usr/include $pkgdir/usr/include/paradiseo
+  mv $pkgdir/usr/include/paradiseo/eo/ $pkgdir/usr/include/paradiseo/eotmp/
+  cp -a $pkgdir/usr/include/paradiseo/eotmp/* $pkgdir/usr/include/paradiseo/
+  rm -r $pkgdir/usr/include/paradiseo/eotmp/
+
+  mv $pkgdir/usr/include/paradiseo/mo/ $pkgdir/usr/include/paradiseo/motmp/
+  cp -a $pkgdir/usr/include/paradiseo/motmp/* $pkgdir/usr/include/paradiseo/
+  rm -r $pkgdir/usr/include/paradiseo/motmp/
+
+  mv $pkgdir/usr/include/paradiseo/moeo/ $pkgdir/usr/include/paradiseo/moeotmp/
+  cp -a $pkgdir/usr/include/paradiseo/moeotmp/* $pkgdir/usr/include/paradiseo/
+  rm -r $pkgdir/usr/include/paradiseo/moeotmp/
+
+  mkdir -p $pkgdir/usr/lib
+  mv $pkgdir/usr/lib64 $pkgdir/usr/lib/paradiseo/
 }
 
