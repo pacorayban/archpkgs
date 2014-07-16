@@ -73,10 +73,10 @@ package() {
   cd "${srcdir}/${_svnmod}"
   make DESTDIR="${pkgdir}" install
 
-  ln -s ${pkgdir}/usr/lib/omc/libomqwt.so ${pkgdir}/usr/lib/
-  ln -s ${pkgdir}/usr/lib/omc/libomqwt.so.6 ${pkgdir}/usr/lib/
-  ln -s ${pkgdir}/usr/lib/omc/libomqwt.so.6.2 ${pkgdir}/usr/lib/
-  ln -s ${pkgdir}/usr/lib/omc/libomqwt.so.6.2.0 ${pkgdir}/usr/lib/
+  ln -sf /usr/lib/omc/libomqwt.so ${pkgdir}/usr/lib/
+  ln -sf /usr/lib/omc/libomqwt.so.6 ${pkgdir}/usr/lib/
+  ln -sf /usr/lib/omc/libomqwt.so.6.2 ${pkgdir}/usr/lib/
+  ln -sf /usr/lib/omc/libomqwt.so.6.2.0 ${pkgdir}/usr/lib/
 
 
 }
