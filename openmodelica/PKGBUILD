@@ -1,6 +1,6 @@
 # Maintainer: viperpaulo
 pkgname=openmodelica-svn
-pkgver=21335
+pkgver=21559
 pkgrel=1
 pkgdesc="The Open Source Modelica Compiler "
 arch=('i686' 'x86_64')
