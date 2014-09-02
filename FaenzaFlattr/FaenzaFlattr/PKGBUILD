@@ -3,7 +3,7 @@
 pkgname=faenzaflattr-icon-theme
 _pkgname=FaenzaFlattr
 pkgver=1.1.7
-pkgrel=1
+pkgrel=2
 pkgdesc="FaenzaFlattr icon theme for KDE4"
 url="http://kde-look.org/content/show.php/FaenzaFlattr?content=164770"
 license=('CCPL:by-nc-sa')
@@ -16,7 +16,12 @@ options=(!strip)
 package() {
   install -d $pkgdir/usr/share/icons
   install -Dm644 $srcdir/${_pkgname}/LICENSE.txt $pkgdir/usr/share/licenses/${_pkgname}/LICENSE
-  cp -r $srcdir/${_pkgname} $pkgdir/usr/share/icons/
+  cp -r $srcdir/${_pkgname}                  $pkgdir/usr/share/icons/
+  cp -r $srcdir/${_pkgname}-Black            $pkgdir/usr/share/icons/
+  cp -r $srcdir/${_pkgname}-DarkDecoration   $pkgdir/usr/share/icons/
+  cp -r $srcdir/${_pkgname}-DarkPlasma       $pkgdir/usr/share/icons/
+  cp -r $srcdir/${_pkgname}-Green            $pkgdir/usr/share/icons/
+  cp -r $srcdir/${_pkgname}-Grey             $pkgdir/usr/share/icons/
   rm $pkgdir/usr/share/icons/${_pkgname}/LICENSE.txt
   
 # # Small icons fix: use scalable icons instead of small ones
