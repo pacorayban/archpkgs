@@ -1,6 +1,6 @@
 # Maintainer: viperpaulo
 pkgname=openmodelica-svn
-pkgver=21559
+pkgver=22154
 pkgrel=1
 pkgdesc="The Open Source Modelica Compiler "
 arch=('i686' 'x86_64')
@@ -38,9 +38,9 @@ prepare() {
 [[ $CARCH == 'x86_64' ]] && {
   sed -i -e 's/\/lib\*\/libeo.a/\/lib64\/libeo.a/g' ${srcdir}/${_svnmod}/configure.in
 }
-[[ $CARCH == 'i686' ]] && {
-  sed -i -e 's/\/lib\*\/libeo.a/\/lib32\/libeo.a/g' ${srcdir}/${_svnmod}/configure.in
-}
+# [[ $CARCH == 'i686' ]] && {
+#   sed -i -e 's/\/lib\*\/libeo.a/\/lib32\/libeo.a/g' ${srcdir}/${_svnmod}/configure.in
+# }
 
 }
 
