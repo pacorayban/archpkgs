@@ -1,0 +1,19 @@
+# Maintainer: viperpaulo
+
+pkgname=ttf-les-sensations-de-cerise
+pkgver=1.0
+pkgrel=1
+pkgdesc="Les Sensations de Cerise font from dafont.com"
+arch=('any')
+url="http://www.dafont.com/les-sensations-de-cerise.font"
+license=('custom')
+depends=('fontconfig' 'xorg-font-utils')
+install=$pkgname.install
+source=($pkgname.zip::http://img.dafont.com/dl/?f=les_sensations_de_cerise)
+md5sums=('7e8a5fa5cc955a30fd2fd11bf67d8a0f')
+
+build() {
+  cd $srcdir
+  install -Dm644 "les Sensations de Cerise.ttf" $pkgdir/usr/share/fonts/TTF/$pkgname.ttf
+}
+ 
