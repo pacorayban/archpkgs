@@ -12,7 +12,7 @@ install=$pkgname.install
 source=($pkgname.zip::http://img.dafont.com/dl/?f=champignon )
 md5sums=('e1c130c5db203ad8cd88d87602d328e3')
 
-build() {
+package() {
   cd $srcdir
   install -Dm644 Champignon.otf $pkgdir/usr/share/fonts/TTF/Champignon.otf
   install -Dm644 champignonaltswash.ttf $pkgdir/usr/share/fonts/TTF/champignonaltswash.ttf
