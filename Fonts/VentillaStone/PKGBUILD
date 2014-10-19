@@ -1,0 +1,19 @@
+# Maintainer: viperpaulo
+
+pkgname=ttf-ventilla-stone
+pkgver=1.0
+pkgrel=1
+pkgdesc="Ventilla Stone font from dafont.com"
+arch=('any')
+url="http://www.dafont.com/ventilla-stone.font"
+license=('custom')
+depends=('fontconfig' 'xorg-font-utils')
+install=$pkgname.install
+source=($pkgname.zip::http://img.dafont.com/dl/?f=ventilla_stone)
+md5sums=('9e3c0e750c6da78474ee6b018c6e607b')
+
+package() {
+  cd $srcdir
+  install -Dm644 "Ventilla Stone.ttf" $pkgdir/usr/share/fonts/TTF/$pkgname.ttf
+}
+ 
