@@ -1,0 +1,19 @@
+# Maintainer: viperpaulo
+
+pkgname=ttf-la-compagnie-des-ombres
+pkgver=1.0
+pkgrel=1
+pkgdesc="La Compagnie des Ombres font from dafont.com"
+arch=('any')
+url="http://www.dafont.com/la-compagnie-des-ombres.font"
+license=('custom')
+depends=('fontconfig' 'xorg-font-utils')
+install=$pkgname.install
+source=($pkgname.zip::http://img.dafont.com/dl/?f=la_compagnie_des_ombres)
+md5sums=('cfa9d19d16190f44fc9d27f42ddb83e8')
+
+package() {
+  cd $srcdir
+  install -Dm644 "la Compagnie des Ombres.ttf" $pkgdir/usr/share/fonts/TTF/$pkgname.ttf
+}
+ 
