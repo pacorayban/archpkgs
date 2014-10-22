@@ -1,0 +1,33 @@
+pkgname=salome-meca
+pkgver=2014.2
+pkgrel=1
+pkgdesc="Salome Meca from code-aster.org"
+url="http://www.code-aster.org/V2/docsmeca/default/fr/"
+license=('LGPL')
+arch=('x86_64')
+depends=('net-tools')
+source=("http://www.code-aster.org/FICHIERS/SALOME-MECA-2014.2-LGPL-1.tgz")
+md5sums=('8594f2096ceddb5b8485a2bdb096fbd8')
+options=(staticlibs libtool)
+
+package() {
+   mkdir -p $pkgdir/opt/salome/appli_V7_4_0
+   export SALOMEDIR=$pkgdir/opt/salome/V2014_2
+
+   cd $srcdir
+   md5sum -c SALOME-MECA-2014.2-LGPL.md5
+   ./SALOME-MECA-2014.2-LGPL.run -t $pkgdir/opt/salome \
+      -a $pkgdir/opt/salome/appli_V7_4_0 -D -l French
+
+   cd $pkgdir/opt/salome/V2014_2/
+   sed -i -e 's/python/python2.7/g' create_appli_V7_4_0.sh
+   sed -i -e 's/salome_prerequisites.sh/.\/salome_prerequisites.sh/g' create_appli_V7_4_0.sh
+   sed -i -e 's/salome_modules.sh/.\/salome_modules.sh/g' create_appli_V7_4_0.sh
+
+   sh create_appli_V7_4_0.sh -a $pkgdir/opt/salome/appli_V7_4_0
+
+   cd $pkgdir/opt/salome/appli_V7_4_0 
+   sed -i -e 's/python/python2.7/g' runAppli
+   sed -i -e 's/\${APPLI_HOME}\/getAppliPath.py/python2.7 \${APPLI_HOME}\/getAppliPath.py/g' runAppli
+}
+
