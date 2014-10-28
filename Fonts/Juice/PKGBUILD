@@ -1,0 +1,19 @@
+# Maintainer: viperpaulo
+
+pkgname=ttf-juice
+pkgver=1.0
+pkgrel=1
+pkgdesc="Juice font from dafont.com"
+arch=('any')
+url="http://www.dafont.com/juice.font"
+license=('custom')
+depends=('fontconfig' 'xorg-font-utils')
+install=ttf-font.install
+source=($pkgname.zip::http://img.dafont.com/dl/?f=juice)
+md5sums=('c115183be2de37c03dea31176c44dff8')
+
+package() {
+  cd $srcdir
+  install -Dm644 "JUICE___.TTF" $pkgdir/usr/share/fonts/TTF/$pkgname.ttf
+}
+ 

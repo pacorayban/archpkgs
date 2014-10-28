@@ -1,0 +1,19 @@
+# Maintainer: viperpaulo
+
+pkgname=ttf-cookie-monster
+pkgver=1.0
+pkgrel=1
+pkgdesc="Cookie Monster font from dafont.com"
+arch=('any')
+url="http://www.dafont.com/cookie-monster.font"
+license=('custom')
+depends=('fontconfig' 'xorg-font-utils')
+install=ttf-font.install
+source=($pkgname.zip::http://img.dafont.com/dl/?f=cookiemonster)
+md5sums=('f9fb0fa6e25062ff3bc49f44777e0b99')
+
+package() {
+  cd $srcdir
+  install -Dm644 "CookieMonster.ttf" $pkgdir/usr/share/fonts/TTF/$pkgname.ttf
+}
+ 

@@ -1,0 +1,19 @@
+# Maintainer: viperpaulo
+
+pkgname=ttf-sounds-good
+pkgver=1.0
+pkgrel=1
+pkgdesc="Sounds Good font from dafont.com"
+arch=('any')
+url="http://www.dafont.com/sounds-good.font"
+license=('custom')
+depends=('fontconfig' 'xorg-font-utils')
+install=$pkgname.install
+source=($pkgname.zip::http://img.dafont.com/dl/?f=sounds_good)
+md5sums=('aaa4f49ed27edbac45652621ec080efd')
+
+package() {
+  cd $srcdir
+  install -Dm644 "Sounds  Good.ttf" $pkgdir/usr/share/fonts/TTF/$pkgname.ttf
+}
+ 

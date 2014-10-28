@@ -1,0 +1,19 @@
+# Maintainer: viperpaulo
+
+pkgname=ttf-amsterdam-graffiti
+pkgver=1.0
+pkgrel=1
+pkgdesc="Amsterdam Graffiti font from dafont.com"
+arch=('any')
+url="http://www.dafont.com/amsterdam-graffiti.font"
+license=('custom')
+depends=('fontconfig' 'xorg-font-utils')
+install=$pkgname.install
+source=($pkgname.zip::http://img.dafont.com/dl/?f=amsterdam_graffiti)
+md5sums=('efd43c4caa18d2ba7b4412284ff830c2')
+
+package() {
+  cd $srcdir
+  install -Dm644 "amsterdam.ttf" $pkgdir/usr/share/fonts/TTF/$pkgname.ttf
+}
+ 

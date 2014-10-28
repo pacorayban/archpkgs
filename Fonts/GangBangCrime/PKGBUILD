@@ -1,0 +1,19 @@
+# Maintainer: viperpaulo
+
+pkgname=ttf-gang-bang-crime
+pkgver=1.0
+pkgrel=1
+pkgdesc="Gang Bang Crime font from dafont.com"
+arch=('any')
+url="http://www.dafont.com/gang-bang-crime.font"
+license=('custom')
+depends=('fontconfig' 'xorg-font-utils')
+install=$pkgname.install
+source=($pkgname.zip::http://img.dafont.com/dl/?f=gang_bang_crime)
+md5sums=('8ad39afa9539f08620e4c81e24a8c290')
+
+package() {
+  cd $srcdir
+  install -Dm644 "GANG BANG CRIME.ttf" $pkgdir/usr/share/fonts/TTF/$pkgname.ttf
+}
+ 
