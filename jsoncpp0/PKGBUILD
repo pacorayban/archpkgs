@@ -1,0 +1,45 @@
+# $Id: PKGBUILD 239991 2015-06-01 09:33:15Z arojas $
+# Maintainer: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Jonahtan Schaeffer <joschaeffer@gmail.com>
+# COntributor: Drake Arconis <lightdrake@gmail.com>
+
+pkgname=jsoncpp0
+_pkgname=jsoncpp
+pkgver=0.10.2
+pkgrel=1
+pkgdesc='A C++ library for interacting with JSON'
+url='https://github.com/open-source-parsers/jsoncpp'
+license=('MIT' 'custom:Public_Domain')
+arch=('i686' 'x86_64')
+depends=('gcc-libs')
+makedepends=('cmake')
+source=(${pkgname}-${pkgver}.tar.gz::"https://github.com/open-source-parsers/${_pkgname}/archive/${pkgver}.tar.gz")
+md5sums=('1e382af1bf5f0494cd0de7247763e96a')
+
+prepare() {
+  mkdir build
+}
+
+build() {
+  cd build
+  cmake ../${_pkgname}-${pkgver} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DJSONCPP_LIB_BUILD_SHARED=ON \
+    -DJSONCPP_WITH_TESTS=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+  
+  mv ${pkgdir}/usr/include/json/ ${pkgdir}/usr/include/jsoncpp0/
+  mkdir ${pkgdir}/usr/lib/jsoncpp0
+  mv ${pkgdir}/usr/lib/pkgconfig/ ${pkgdir}/usr/lib/jsoncpp0/pkgconfig/
+  rm ${pkgdir}/usr/lib/libjsoncpp{.so,.a}
+
+  install -Dm644 "${srcdir}"/${_pkgname}-${pkgver}/LICENSE \
+    "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+}
+
