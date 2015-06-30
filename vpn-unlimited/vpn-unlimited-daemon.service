@@ -1,10 +1,10 @@
 [Unit]
 Description=VPN Unlimited daemon
-After=network.target
+Requires=network.target
 
 [Service]
 Type=simple
-PIDFile=/var/run/vpn-unlimited-daemon.pid
+PIDFile=/var/run/vpn_unlimited_service
 ExecStart=/usr/bin/vpn-unlimited-daemon
 
 [Install]
