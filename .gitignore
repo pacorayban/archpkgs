@@ -3,6 +3,8 @@
 *.log
 *.log.*
 *.sig
+*.swp
+
 pkg/
 src/
 /yaourt
