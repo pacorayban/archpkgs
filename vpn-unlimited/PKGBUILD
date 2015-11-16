@@ -2,17 +2,17 @@
 
 pkgname=vpn-unlimited
 pkgver=2.8.0
-pkgrel=2
+pkgrel=3
 pkgdesc="VPN client for the VPN Unlimited service"
 arch=('x86_64')
 url="https://www.vpnunlimitedapp.com/downloadlinux"
 license=('custom')
 options=('emptydirs')
-depends=('qt4' 'libssh2' 'libcurl-compat' 'pkcs11-helper' 'c-ares' 'jsoncpp0' 'lsb-release')
+depends=('qt4' 'libssh2' 'libcurl-compat' 'pkcs11-helper' 'c-ares' 'jsoncpp0' 'lsb-release' 'kde-cli-tools')
 source=("http://apt.simplexsolutionsinc.com/repository/pool/main/v/vpn-unlimited/${pkgname}_${pkgver}_amd64.deb"
         "vpn-unlimited-daemon.service")
 md5sums=('e9a1cae5c4e65ad87ee7120dc5b3457c'
-         '7c3269456d352df8d676c722058b5067')
+         '590bfc12cff4717ec382505b66d12ec7')
 
 package() {
   # Unpack the vendor package
@@ -45,20 +45,21 @@ package() {
 
 launch_script(){
 cat > "${pkgdir}/usr/bin/vpnu" <<- EOF
-#!/bin/sh
+#!/bin/bash
 
-PID=\$(pidof vpn-unlimited-daemon)
+PID=""
 
-if [[ \$EUID -ne 0 ]]; then
-   echo "Must be root to run VPN daemon" 1>&2
-   exit 1
-else
-   if [ -z \$PID ]; then
-      vpn-unlimited-daemon &
-      sleep 2
-   fi
+function get_pid {
+  PID=\$(pidof vpn-unlimited-daemon)
+}
 
-   LD_PRELOAD=libcurl.so.3 vpn-unlimited	
+get_pid
+
+if [ -z \$PID ];then
+  kdesu vpn-unlimited-daemon&
+  sleep 2
 fi
+
+LD_PRELOAD=libcurl.so.3 vpn-unlimited
 EOF
 }
