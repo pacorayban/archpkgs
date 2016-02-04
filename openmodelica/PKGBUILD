@@ -16,7 +16,7 @@ conflicts=('openmodelica' 'openmodelica-svn')
 
 #source=($pkgname::git+https://github.com/OpenModelica/OpenModelica) 
 #md5sums=('SKIP')
-install=(openmodelica-git.install)
+install=openmodelica-git.install
 source=('omedit.desktop'
         'omnotebook.desktop'
         'omplot.desktop'
