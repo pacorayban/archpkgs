@@ -1,6 +1,6 @@
 # Maintainer: Xwang <xwaang1976@gmail.com>
 pkgname=openmodelica-git
-pkgver=1.9.3.dev.r705.g65b5522
+pkgver=1.10.0.dev.r340.g066bd56
 pkgrel=1
 pkgdesc="The Open Source Modelica Suite"
 arch=('i686' 'x86_64')
@@ -63,8 +63,8 @@ build() {
               --without-omc \
               --with-omniORB \
               --with-cppruntime \
-              --with-lapack='-llapack -lblas' \
-              --without-qwt
+              --with-lapack='-llapack -lblas'
+#              --without-qwt
   make
 }
 
