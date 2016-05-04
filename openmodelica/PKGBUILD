@@ -1,13 +1,13 @@
 # Maintainer: Xwang <xwaang1976@gmail.com>
 pkgname=openmodelica-git
-pkgver=1.10.0.dev.r340.g066bd56
+pkgver=1.10.0.dev.r548.g9a87272
 pkgrel=1
 pkgdesc="The Open Source Modelica Suite"
 arch=('i686' 'x86_64')
 url="https://openmodelica.org"
 license=('OSMC-PL')
 
-depends=('java-environment' 'lpsolve' 'hdf5' 'omniorb' 'openscenegraph' 'qtwebkit' 'sundials' 'libatomic_ops' 'python' 'gtkglext' 'ruby' 'coin-or-ipopt' 'qjson' 'suitesparse' 'boost-libs')
+depends=('java-environment' 'lpsolve' 'hdf5' 'omniorb' 'openscenegraph' 'qtwebkit' 'sundials' 'libatomic_ops' 'python' 'gtkglext' 'ruby' 'coin-or-ipopt' 'qjson' 'suitesparse' 'boost-libs' 'qt5-webkit' 'qt5-svg' 'qt5-tools')
 
 makedepends=('autoconf' 'automake' 'libtool' 'gcc' 'gcc-fortran' 'boost' 'clang' 'cmake' 'jre7-openjdk' 'antlr2' 'subversion' 'lib32-expat' 'lib32-ncurses' 'lib32-readline')
 
@@ -23,6 +23,7 @@ source=('omedit.desktop'
         'omshell-terminal.desktop'
         'omshell.desktop'
         'openmodelica-git.install'
+        'omedit.patch'
         "${pkgname}::git+https://github.com/OpenModelica/OpenModelica.git") 
 md5sums=('28f87d0e0525a92fcd712167fc0b0816'
          '4235c1b36072ecf397dc46688bc3e890'
@@ -30,24 +31,23 @@ md5sums=('28f87d0e0525a92fcd712167fc0b0816'
          '3f816dc47fa32a0cd842b1be58fa2f58'
          '749cb02b41a4294fc5f534f9d1aa0ce9'
          'a282916c73235c3fdb306f57f9d7dc2d'
+         '79376887eb1c754893b2e1cf01720145'
          'SKIP')
 
 prepare() {
-#   mkdir -p "$srcdir/$pkgname"
-#    if [ ! -d "$srcdir/$pkgname/.git" ]; then
-#        git clone https://github.com/OpenModelica/OpenModelica.git "$srcdir/$pkgname"
-#        echo "***** CLONING COMPLETED!!!!! ****"
-#    fi
-  cd "$srcdir/$pkgname"
-  if grep -q "https://github.com/OpenModelica/" .gitmodules; then
-    git submodule foreach --recursive "git checkout master"
-    git submodule foreach --recursive "git pull"
-  else 
-    sed -i 's,../,https://github.com/OpenModelica/,g' .gitmodules
     # clone all submodules
+    mkdir -p "$srcdir/$pkgname"
+    if [ ! -d "$srcdir/$pkgname/.git" ]; then
+        git clone https://github.com/OpenModelica/OpenModelica "$srcdir/$pkgname"
+        echo "***** CLONING COMPLETED!!!!! ****"
+    fi
+    cd "$srcdir/$pkgname"
+    sed -i 's,../,https://github.com/OpenModelica/,g' .gitmodules
     git submodule sync
     git submodule update --init --recursive
-  fi
+    cd "$srcdir"
+    patch -p1 < ${srcdir}/omedit.patch
+    cd "$srcdir/$pkgname"
 }
 
 pkgver() {
