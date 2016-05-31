@@ -1,0 +1,245 @@
+# Maintainer: FadeMind <fademind@gmail.com>
+# Contributor: Grigorii Horos <horosgrisa@gmail.com>
+
+pkgbase=papirus-dark
+pkgname=(
+#         'bomi-skin-papirus-dark'
+#         'libreoffice-papirus-theme-dark'
+#         'papirus-dark'
+#         'papirus-aurorae-theme-dark'
+#         'papirus-color-scheme-dark'
+#         'papirus-gtk-theme-dark'
+#         'papirus-icon-theme-gtk-dark'
+         'papirus-icon-theme-kde-dark'
+#         'papirus-k3b-theme-dark'
+#         'papirus-kmail-theme-dark'
+#         'papirus-konsole-colorscheme-dark'
+#         'papirus-plasma-theme-dark'
+#         'papirus-qtcurve-theme-dark'
+#         'papirus-sddm-theme-dark'
+#         'papirus-smplayer-theme-dark'
+#         'papirus-vlc-theme-dark'
+         'papirus-yakuake-theme-dark' 
+         )
+pkgver=r643.cc9b5c6
+pkgrel=1
+pkgdesc="Papirus Suite for KDE (git version)"
+arch=('any')
+#url="https://github.com/varlesh/papirus-suite"
+url="https://github.com/droserasprout/papirus-suite"
+license=('CCPL:by-sa')
+options=('!strip')
+makedepends=('git' 'make' 'xdg-utils')
+depends=('gtk-update-icon-cache')
+conflicts=('papirus' 'papirus-git')
+source=("${pkgbase}::git+${url}.git")
+sha256sums=('SKIP')
+
+pkgver(){
+    cd ${pkgbase}
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+package_bomi-skin-papirus-dark() {
+    pkgdesc="Papirus theme for Bomi"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('bomi-fresh')
+    optdepends=()
+    conflicts=('bomi-skin-papirus')
+    cd ${srcdir}/${pkgbase}/players-skins/bomi-skin/
+    make install DESTDIR="$pkgdir"
+}
+
+package_libreoffice-papirus-theme-dark() {
+    pkgdesc="Papirus theme for Libreoffice"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=()
+    optdepends=('libreoffice' 'libreoffice-fresh-rpm')
+    conflicts=('libreoffice-style-papirus' 'libreoffice-papirus-theme' 'libreoffice-fresh-rpm-papirus-theme')
+    cd  ${srcdir}/${pkgbase}/libreoffice-icons/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-dark() {
+    pkgdesc="Meta-package for modified and adaptive Papirus theme (git version)"
+    depends=(
+             'papirus-aurorae-theme-dark'
+             'papirus-color-scheme-dark'
+             'papirus-gtk-theme-dark'
+             'papirus-icon-theme-kde-dark'
+             'papirus-konsole-colorscheme-dark'
+             'papirus-plasma-theme-dark' 
+             'papirus-sddm-theme-dark'
+             )
+    optdepends=(
+                "bomi-skin-papirus-dark: Papirus theme for Bomi (git version)"
+                "libreoffice-papirus-theme-dark: Papirus theme for LibreOffice (git version)"
+                "papirus-k3b-theme-dark: Papirus theme for K3B (git version)"
+                "papirus-kmail-theme-dark: Papirus theme for KMail (git version)"
+                "papirus-qtcurve-theme-dark: Papirus decorations for QtCurve (git version)"
+                "papirus-smplayer-theme-dark: Papirus theme for SMPlayer (git version)"
+                "papirus-vlc-theme-dark: Papirus theme for VLC Media Player (git version)" 
+                "papirus-yakuake-theme-dark: Papirus theme for Yakuake (git version)"
+                "papirus-wallpapers-dark: Papirus wallpapers suite (git version)"
+                "arc-dark-suite-dark: Arc-Dark cusomization for Plasma 5 (git version)"
+                )
+} 
+
+package_papirus-aurorae-theme-dark() {
+    pkgdesc="Papirus decorations for Kwin (git version)"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('kwin')
+    optdepends=()
+    conflicts=('papirus-aurorae-theme')
+    cd  ${srcdir}/${pkgbase}/kde-pack/aurorae-themes/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-color-scheme-dark() {
+    pkgdesc="Papirus color scheme for KDE (git version)"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('plasma-desktop')
+    optdepends=()
+    conflicts=('papirus-color-scheme')
+    cd  ${srcdir}/${pkgbase}/kde-pack/color-schemes/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-gtk-theme-dark() {
+    pkgdesc="Papirus GTK theme for KDE (git version)"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('gtk-engine-murrine' 'gtk2' 'gtk3')
+    optdepends=()
+    conflicts=('papirus-gtk-theme')
+    cd  ${srcdir}/${pkgbase}/kde-pack/gtk-themes/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-icon-theme-gtk-dark() {
+    pkgdesc="Papirus icon theme for GTK (git version)"
+    options=('!strip')
+    makedepends=('git' 'xdg-utils')
+    depends=('gtk-update-icon-cache')
+    optdepends=()
+    conflicts=('papirus-gtk-icon-theme' 'papirus-gtk-icon-theme-dark' 'papirus-icon-theme-gtk')
+    cd  ${srcdir}/${pkgbase}/gtk-icons/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-icon-theme-kde-dark() {
+    pkgdesc="Papirus icon theme for KDE (git version)"
+    options=('!strip')
+    makedepends=('git' 'make' 'xdg-utils')
+    depends=('gtk-update-icon-cache')
+    optdepends=()
+    conflicts=('papirus-icon-theme' 'papirus-icon-theme-kde' 'papirus-icon-theme-dark')
+    cd  ${srcdir}/${pkgbase}/kde-pack/icons/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-k3b-theme-dark() {
+    pkgdesc="Papirus theme for K3B (git version)"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('k3b')
+    optdepends=()
+    cd  ${srcdir}/${pkgbase}/kde-pack/k3b-themes/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-kmail-theme-dark() {
+    pkgdesc="Papirus theme for Kmail (git version)"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('kmail')
+    optdepends=()
+    conflicts=('papirus-kmail-theme')
+    cd  ${srcdir}/${pkgbase}/kde-pack/kmail-theme/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-konsole-colorscheme-dark() {
+    pkgdesc="Papirus colorscheme for Konsole (git version)"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('konsole')
+    optdepends=()
+    conflicts=('papirus-konsole-colorscheme')
+    cd ${srcdir}/${pkgbase}/kde-pack/konsole-colorschemes/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-plasma-theme-dark() {
+    pkgdesc="Papirus plasma theme for KDE (git version)"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('plasma-desktop')
+    optdepends=()
+    conflicts=('papirus-look-and-feel' 'plasma-theme-papirus')
+    install='plasma-refresh.install'
+    cd  ${srcdir}/${pkgbase}/kde-pack/look-and-feel/
+    make install DESTDIR="$pkgdir"
+    cd  ${srcdir}/${pkgbase}/kde-pack/plasma-themes/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-qtcurve-theme-dark() {
+    pkgdesc="Papirus decorations for QtCurve (git version)"
+    arch=('i686' 'x86_64')
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('qtcurve-gtk2' 'qtcurve-qt4' 'qtcurve-qt5' 'qtcurve-utils')
+    optdepends_x86_64=('lib32-qtcurve-gtk2' 'lib32-qtcurve-qt4' 'lib32-qtcurve-utils')
+    conflicts=('papirus-qtcurve-theme')
+    cd  ${srcdir}/${pkgbase}/kde-pack/QtCurve/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-sddm-theme-dark() {
+    pkgdesc="Papirus theme for SDDM (git version)"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('sddm' 'sddm-kcm')
+    optdepends=()
+    conflicts=('papirus-sddm-theme')
+    cd ${srcdir}/${pkgbase}/kde-pack/sddm-themes/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-smplayer-theme-dark() {
+    pkgdesc="Papirus theme for SMPlayer (git version)"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('smplayer')
+    optdepends=()
+    conflicts=('papirus-smplayer-theme')
+    cd ${srcdir}/${pkgbase}/players-skins/smplayer-themes/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-vlc-theme-dark() {
+    pkgdesc="Papirus theme for VLC Media Player (git version)"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('vlc')
+    optdepends=()
+    conflicts=('papirus-vlc-theme')
+    cd ${srcdir}/${pkgbase}/players-skins/vlc-skins/
+    make install DESTDIR="$pkgdir"
+}
+
+package_papirus-yakuake-theme-dark() {
+    pkgdesc="Papirus theme for Yakuake (git version)"
+    options=('!strip')
+    makedepends=('git' 'make')
+    depends=('yakuake')
+    optdepends=()
+    conflicts=('papirus-yakuake-theme' 'yakuake-skin-papirus' 'yakuake-skin-papirus-dark' 'yakuake-skin-papirus-dark-frameworks' 'yakuake-skin-papirus-frameworks')
+    cd ${srcdir}/${pkgbase}/kde-pack/yakuake-skins/
+    make install DESTDIR="$pkgdir"
+}
