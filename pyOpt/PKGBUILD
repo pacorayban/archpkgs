@@ -1,0 +1,22 @@
+pkgname=python2-pyopt
+_pkgname=pyOpt
+pkgver=1.2.0
+pkgrel=1
+pkgdesc="pyOpt is a Python-based package for formulating and solving nonlinear constrained optimization problems in an efficient, reusable and portable manner."
+url="http://www.pyopt.org/"
+arch=(any)
+license=('LGPL')
+depends=('python2-numpy' 'python2-mpi4py')
+makedepends=('swig')
+source=(http://www.pyopt.org/_downloads/$_pkgname-$pkgver.tar.gz)
+
+#build() {
+#  cd $srcdir/$_pkgname-"$pkgver"
+#  python2 setup.py build
+#}
+package() {
+  cd $srcdir/$_pkgname-"$pkgver"
+  python2 setup.py install --root="$pkgdir/"
+#--optimize=1
+}
+md5sums=('84f7574cb40919009312ad52d30109db')

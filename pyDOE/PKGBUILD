@@ -1,0 +1,24 @@
+pkgbase=pyDOE
+pkgname=python2-pydoe
+pkgver=0.3.8
+pkgrel=1
+pkgdesc="Design of experiments for Python"
+url="https://pypi.python.org/pypi/pyDOE/"
+arch=('any')
+license=('BSD')
+depends=('python2-scipy' 'python2-numpy')
+makedepends=('python2-setuptools')
+
+source=($pkgbase-$pkgver.zip::https://pypi.python.org/packages/source/p/$pkgbase/$pkgbase-$pkgver.zip)
+md5sums=('788ee9cbb5716d790e5f713ea491e84e')
+
+
+package() {
+  cd ${pkgbase}-${pkgver}
+#  export PYTHONPATH=/usr/lib/python2.7/
+#  /usr/bin/python2.7 setup.py install --install-lib ${pkgdir}/usr/lib/python2.7/site-packages/$pkgbase
+  install -m755 -d "${pkgdir}/usr/lib/python2.7/site-packages/$pkgbase"
+  install -m755 pyDOE/* "${pkgdir}/usr/lib/python2.7/site-packages/$pkgbase/"
+  install -m755 -d "${pkgdir}/usr/lib/python2.7/site-packages/${pkgbase}.egg-info"
+  install -m755 pyDOE.egg-info/* "${pkgdir}/usr/lib/python2.7/site-packages/${pkgbase}.egg-info/"
+}
