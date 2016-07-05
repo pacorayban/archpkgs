@@ -1,0 +1,64 @@
+# Maintainer: Kibeom Kim <kkb110@gmail.com>
+
+pkgname=getfem
+pkgver=4.2
+pkgrel=1
+pkgdesc="GetFEM++ is basically a generic C++ finite element library."
+arch=('i686' 'x86_64')
+url="http://download.gna.org/getfem/html/homepage/"
+license=('LGPL')
+depends=(
+  'scilab'
+  'lapack'
+  'metis'
+  'muparser'
+  'openmpi'
+  'python2-numpy'
+  'python2-scipy'
+  'qhull'
+  'superlu'
+)
+makedepends=(
+  'boost'
+)
+source=("http://download.gna.org/getfem/stable/$pkgname-$pkgver.tar.gz")
+sha512sums=('c3480b2cf80a3040665b9c504860de616091298a0f7abd5d3982e945e07adef0833ec920bcd9ffd2e67cb5137badef84d9657e9cec647d6e68d29b593145f070')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  # Update some header paths.
+  sed -i 's@qhull/qhull\.h@libqhull/libqhull\.h@g' $(grep qhull/qhull -lr "$srcdir")
+  sed -i 's@mpi/mpi.h@mpi.h@g' $(grep mpi/mpi.h -lr "$srcdir")
+
+  # Fix Python path.
+  sed -i 's@/usr/bin/python@/usr/bin/python2@'  "$srcdir/$pkgname-$pkgver/bin/extract_doc"
+  # Fix Python syntax.
+  sed -i 's@raise \(ParseError\|SystemExit\), \(.*\)$@raise \1(\2)@' "$srcdir/$pkgname-$pkgver/bin/extract_doc"
+
+  if [[ $CARCH == 'x86_64' ]]
+  then
+    enable_qd='--enable-qd'
+  # i686
+  else
+    enable_qd='--enable-dd'
+  fi
+
+  PYTHON=/usr/bin/python2 ./configure \
+    --enable-scilab \
+    --enable-muparser \
+    --enable-paralevel \
+    --enable-python \
+    --enable-qhull \
+    --enable-superlu  \
+    --enable-mumps=no \
+    --with-pic \
+    --prefix=/usr
+#    $enable_qd \
+#    patch -p2 < ../../_getfem.so_linking_fix.patch
+  make
+}
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make install DESTDIR="$pkgdir"/usr
+}

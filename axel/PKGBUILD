@@ -1,0 +1,36 @@
+pkgname=axel-git
+pkgver=1514.4c697af
+pkgrel=1
+pkgdesc="Algebraic geometric modeling"
+arch=('i686' 'x86_64')
+url="http://axel.inria.fr/"
+license=('custom')
+depends=('qt5-base' 'vtk')
+makedepends=('cmake')
+optdepends=()
+options=()
+source=("${pkgname}::git+git://dtk.inria.fr/axel/axel-sdk.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$pkgname"
+  printf "%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd "$srcdir/${pkgname}"
+  ./script/init.cfg dtk axel vtkview mypkg bsplinetools semialgebraictools paramtools solidtools msplinetools
+}
+
+build() {
+  mkdir -p "${srcdir}/${pkgname}/build"
+  cd "${srcdir}/${pkgname}/build"
+
+  cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+  make PREFIX=/usr
+}
+
+package() {
+  cd "${srcdir}/${pkgname}/build"
+  make PREFIX=/usr DESTDIR=${pkgdir} install
+}
