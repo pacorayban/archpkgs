@@ -1,0 +1,33 @@
+# Maintainer: viperpaulo
+pkgname=getdp
+pkgver=2.8.0
+pkgrel=1
+pkgdesc="GetDP is a general finite element solver using mixed elements to discretize de Rham-type complexes in one, two and three dimensions."
+arch=('i686' 'x86_64')
+url="http://getdp.info/"
+license=('GPL')
+depends=('gmsh' 'lapack' 'blas' 'gcc-fortran' 'petsc' 'slepc' 'arpack' 'suitesparse')
+makedepends=('cmake')
+
+source=("${url}src/${pkgname}-${pkgver}-source.tgz")
+md5sums=('586929b3033bb3e1ae2f9f7611dbaa52')
+
+build() {
+   cd "${srcdir}/${pkgname}-${pkgver}-source"
+
+   mkdir -p build
+   cd build
+  export PYTHONPATH="/usr/lib/python2.7/"
+   cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+         -DENABLE_BUILD_SHARED=ON \
+         -DENABLE_PYTHON=OFF ..
+
+   make
+}
+
+package() {
+   cd "${srcdir}/${pkgname}-${pkgver}-source/build"
+   make DESTDIR=${pkgdir} install
+
+   rm -rf ${pkgdir}/usr/lib64/libGmsh.so
+}
