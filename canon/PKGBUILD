@@ -1,7 +1,7 @@
 # Maintainer: danilo <gezuru *at* gmail *dot* com>
 pkgname=canon-cque-fr
-pkgver=2.0.10
-_pkgver=2.0-10
+pkgver=3.0.3
+_pkgver=3.0-3
 _lang=fr
 pkgrel=1
 pkgdesc='Canon CQue printing driver (PPDs and sicgsfilter only!)'
@@ -15,16 +15,17 @@ source=(
 #	http://files.canon-europe.com/files/soft43376/software/g12btfr_lintgz_32_64_0204.zip
 #	http://files.canon-europe.com/files/soft44090/software/g136nfr_lintgz_32_64_0205.zip
 #	http://files.canon-europe.com/files/soft44597/software/g13bqfr_lintgz_32_64_0206.zip
-  $pkgname-$pkgver.zip::http://files.canon-europe.com/files/soft45524/software/o1512ufr_linux_CQueTGZ_v2010_32_64.zip
+  $pkgname-$pkgver.zip::http://files.canon-europe.com/files/soft45524/Software/CQue_v${pkgver}_Linux_32_64_FR.tar.zip
 	LICENSE
 )
-md5sums=('83c53d874e25f28ec03f695de3c7c65b'
+md5sums=('c211e44f1399e1a37570b5be711a1b64'
          '4df9593c184cd39bb9d9df6195c4d390')
 
 build() {
-    cd $srcdir/$pkgname-$pkgver
+    # cd $srcdir/$pkgname-$pkgver
+    cd $srcdir/
 #    if [ $CARCH != 'i686' ]; then
-        tar xfz cque-${_lang}-${_pkgver}.$CARCH.tar.gz 
+        tar xfz CQue_v${pkgver}_Linux_32_64_FR.tar/cque-${_lang}-${_pkgver}.$CARCH.tar.gz
 #    else
 #        tar xfz cque-${_lang}-${_pkgver}.tar.gz
 #    fi
