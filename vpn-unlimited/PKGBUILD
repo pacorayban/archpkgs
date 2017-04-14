@@ -1,8 +1,8 @@
 # Maintainer: Alex March <alex.march.dev@gmail.com>
 
 pkgname=vpn-unlimited
-pkgver=2.8.0
-pkgrel=3
+pkgver=4.0
+pkgrel=1
 pkgdesc="VPN client for the VPN Unlimited service"
 arch=('x86_64')
 url="https://www.vpnunlimitedapp.com/downloadlinux"
@@ -11,13 +11,13 @@ options=('emptydirs')
 depends=('qt4' 'libssh2' 'libcurl-compat' 'pkcs11-helper' 'c-ares' 'jsoncpp0' 'lsb-release' 'kde-cli-tools')
 source=("http://apt.simplexsolutionsinc.com/repository/pool/main/v/vpn-unlimited/${pkgname}_${pkgver}_amd64.deb"
         "vpn-unlimited-daemon.service")
-md5sums=('e9a1cae5c4e65ad87ee7120dc5b3457c'
+md5sums=('fa9f0f28f924e5fa022b757b589acaf1'
          '590bfc12cff4717ec382505b66d12ec7')
 
 package() {
   # Unpack the vendor package
   cd "${srcdir}"
-  tar -zxf data.tar.gz
+  tar -xf data.tar.xz
   mv ${srcdir}/usr/sbin/* "${srcdir}/usr/bin"
   rm -rf "${srcdir}/usr/sbin/"
   cp -dpr "${srcdir}/usr" "${pkgdir}"
